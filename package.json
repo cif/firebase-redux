@@ -1,0 +1,29 @@
+{
+  "name": "firebase-redux",
+  "version": "1.0.0",
+  "description": "Demo using firebase with redux",
+  "main": "index.js",
+  "scripts": {
+    "test": "test",
+    "dev": "node development.js"
+  },
+  "keywords": [
+    "firebase",
+    "redux"
+  ],
+  "author": "Ben Ipsen <email@benipsen.com>",
+  "license": "ISC",
+  "devDependencies": {
+    "eslint": "^3.8.1",
+    "webpack": "^1.13.2",
+    "webpack-dev-server": "^1.16.0"
+  },
+  "dependencies": {
+    "react": "^15.3.2",
+    "react-dom": "^15.3.2",
+    "react-redux": "^4.4.5",
+    "redux": "^3.6.0",
+    "redux-actions": "^0.12.0",
+    "redux-thunk": "^2.1.0"
+  }
+}
