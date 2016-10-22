@@ -1,18 +1,24 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { incrementCounter } from '../lib/redux/counter';
+import { updateCounterAndPersist } from '../lib/redux/counter';
+
 export const App = (props) => {
-  const { count, dispatchIncrement } = props;
+  const { count, updateCounter } = props;
   return (
     <div>
       <h1>The count: {count}</h1>
-      <button onClick={dispatchIncrement}>Increment</button>
+      <button onClick={() => { updateCounter(count + 1) }}>Increment</button>
+      <button onClick={() => { updateCounter(count - 1) }}>Decrement</button>
     </div>
   );
 }
 
-const dispatcher = (dispatch) => ({
-  dispatchIncrement: () => dispatch(incrementCounter())
+const selector = (state) => ({
+  count: state.counter
 });
 
-export default connect((state) => ({ count: state.counter }), dispatcher)(App);
+const dispatcher = (dispatch) => ({
+  updateCounter: (count) => dispatch(updateCounterAndPersist(count))
+});
+
+export default connect(selector, dispatcher)(App);
