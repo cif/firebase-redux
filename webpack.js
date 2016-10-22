@@ -9,12 +9,26 @@ var HOST = 'localhost';
 var config = {
   entry: ['./src/app.js', 'webpack/hot/only-dev-server'],
   output: {
-    filename: 'dev.js',
-    path: path.resolve(__dirname, 'public/')
+    filename: 'bundle.js',
+    path: path.resolve(__dirname, 'public/dist')
   },
   plugins: [
-    new webpack.HotModuleReplacementPlugin()
-  ]
+    new webpack.HotModuleReplacementPlugin(),
+    new webpack.SourceMapDevToolPlugin()
+  ],
+  module: {
+    loaders: [
+      {
+        test: /\.js$/,
+        loaders: ['react-hot-loader/webpack', 'babel'],
+        include: path.resolve('./src'),
+        exclude: path.resolve('./node_modules/')
+      }
+    ]
+  },
+  "resolve": {
+    extensions: ['', '.js']
+  }
 };
 
 server = new WebpackDevServer(webpack(config), {

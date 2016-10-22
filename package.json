@@ -4,8 +4,7 @@
   "description": "Demo using firebase with redux",
   "main": "index.js",
   "scripts": {
-    "test": "test",
-    "dev": "node development.js"
+    "dev": "node webpack.js"
   },
   "keywords": [
     "firebase",
@@ -14,16 +13,38 @@
   "author": "Ben Ipsen <email@benipsen.com>",
   "license": "ISC",
   "devDependencies": {
-    "eslint": "^3.8.1",
+    "babel-core": "^6.17.0",
+    "babel-loader": "^6.2.5",
+    "babel-plugin-transform-object-rest-spread": "^6.16.0",
+    "babel-plugin-transform-react-jsx": "^6.8.0",
+    "babel-plugin-transform-runtime": "^6.15.0",
+    "babel-preset-es2015": "^6.16.0",
+    "babel-preset-react": "^6.16.0",
+    "react-hot-loader": "^3.0.0-beta.6",
     "webpack": "^1.13.2",
     "webpack-dev-server": "^1.16.0"
   },
   "dependencies": {
+    "firebase": "^3.5.1",
     "react": "^15.3.2",
     "react-dom": "^15.3.2",
     "react-redux": "^4.4.5",
     "redux": "^3.6.0",
     "redux-actions": "^0.12.0",
     "redux-thunk": "^2.1.0"
+  },
+  "babel": {
+    "plugins": [
+      "transform-object-rest-spread",
+      ["transform-runtime", {
+        "polyfill": true,
+        "regenerator": true
+      }],
+      "transform-react-jsx"
+    ],
+    "presets": [
+      "es2015",
+      "react"
+    ]
   }
 }
