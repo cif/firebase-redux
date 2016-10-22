@@ -8,7 +8,7 @@ var HOST = 'localhost';
 
 var config = {
   entry: [
-    'webpack-dev-server/client?http://0.0.0.0:3000',
+    'webpack-dev-server/client?http://0.0.0.0:' + PORT,
     './src/app.js',
     'webpack/hot/only-dev-server'
   ],
