@@ -7,7 +7,11 @@ var PORT = '3000';
 var HOST = 'localhost';
 
 var config = {
-  entry: ['./src/app.js', 'webpack/hot/only-dev-server'],
+  entry: [
+    'webpack-dev-server/client?http://0.0.0.0:3000',
+    './src/app.js',
+    'webpack/hot/only-dev-server'
+  ],
   output: {
     filename: 'bundle.js',
     path: path.resolve(__dirname, 'public/dist')
