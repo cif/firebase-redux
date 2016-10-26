@@ -1,0 +1,18 @@
+{
+  "plugins": [
+    "transform-object-rest-spread",
+    [
+      "transform-runtime",
+      {
+        "polyfill": true,
+        "regenerator": true
+      }
+    ],
+    "transform-react-jsx"
+  ],
+  "presets": [
+    "es2015",
+    "stage-1",
+    "react"
+  ]
+}

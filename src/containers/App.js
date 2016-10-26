@@ -4,6 +4,15 @@ import { Link } from 'react-router';
 import Counter from '../components/Counter';
 import { updateCounterAndPersist } from '../redux/counter';
 
+const selector = state => ({
+  count: state.counter,
+  user: state.user
+});
+
+const dispatcher = dispatch => ({
+  updateCounter: count => dispatch(updateCounterAndPersist(count))
+});
+
 export const App = (props) => {
   const { count, updateCounter } = props;
   return (
@@ -21,14 +30,5 @@ App.propTypes = {
   count: PropTypes.number,
   updateCounter: PropTypes.func
 };
-
-const selector = state => ({
-  count: state.counter,
-  user: state.user
-});
-
-const dispatcher = dispatch => ({
-  updateCounter: count => dispatch(updateCounterAndPersist(count))
-});
 
 export default connect(selector, dispatcher)(App);
