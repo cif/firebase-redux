@@ -12,7 +12,7 @@ const selector = state => ({
 
 const dispatcher = dispatch => ({
   signUpNewUser: (email, password) => dispatch(createNewUser(email, password)),
-  signInUser: (email, password) => dispatch(logInUser(email, password)),
+  signInUser: () => (email, password) => dispatch(logInUser(email, password)),
   signOutUser: () => dispatch(logOutUser())
 });
 
@@ -23,7 +23,6 @@ export const App = (props) => {
     signInUser,
     signOutUser
   } = props;
-
   return (
     <div>
       <LoginOrSignup

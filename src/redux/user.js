@@ -13,23 +13,40 @@ export const userError = createAction(USER_ERROR);
 export const userInFlight = createAction(USER_LOGIN_SET_INFLIGHT);
 
 export const createNewUser = (email, password) => (dispatch) => {
-  dispatch(userInFlight);
+  const dispatchError = (error) => {
+    dispatch(userInFlight(false));
+    dispatch(userError(error));
+  };
+
+  dispatch(userInFlight(true));
   firebase.auth().createUserWithEmailAndPassword(email, password)
-    .then(user => user.sendEmailVerification()) // optional
-    .catch(error => dispatch(userError(error)));
+    .then((user) => {
+      // add to database for searchability / admin
+      firebase.database().ref('users').push().set({ email: user.email, name: user.displayName });
+
+      // send confirmation
+      user.sendEmailVerification()
+        .catch(dispatchError);
+    })
+    .catch(dispatchError);
 };
 
 export const logInUser = (email, password) => (dispatch) => {
-  console.log('redux');
-  dispatch(userInFlight);
+  dispatch(userInFlight(true));
   firebase.auth().signInWithEmailAndPassword(email, password)
-    .catch(error => dispatch(userError(error)));
+    .catch((error) => {
+      dispatch(userInFlight(false));
+      dispatch(userError(error));
+    });
 };
 
 export const logOutUser = () => (dispatch) => {
   dispatch(userInFlight);
   firebase.auth().signOut()
-    .catch(error => dispatch(userError(error)));
+    .catch((error) => {
+      dispatch(userInFlight(false));
+      dispatch(userError(error));
+    });
 };
 
 const defaultState = {

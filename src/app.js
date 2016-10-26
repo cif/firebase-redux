@@ -15,10 +15,7 @@ import Testing from './containers/Testing';
   ReactDOM.render(
     (
       <Provider store={store}>
-        <Router history={history}>
-          <Route path="/" component={App} />
-          <Route path="/testing" component={Testing} />
-        </Router>
+        <App />
       </Provider>
     ),
     global.document.getElementById('app')
