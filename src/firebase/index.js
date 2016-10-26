@@ -1,5 +1,5 @@
 import firebase from 'firebase';
-import { updateCounter } from '../redux/counter';
+import firebaseAuthConnector from './auth';
 
 // Replace this with your non hidden credentials or const
 import firebaseConfig from '../config/firebaseConfig';
@@ -7,11 +7,7 @@ import firebaseConfig from '../config/firebaseConfig';
 firebase.initializeApp(firebaseConfig);
 
 export const firebaseConnector = (store) => {
-  const { dispatch } = store;
-  firebase.database().ref('count').on('value', (count) => {
-    dispatch(updateCounter(count.val()));
-  });
-
+  firebaseAuthConnector(firebase, store);
   return store;
 };
 

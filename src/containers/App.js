@@ -1,8 +1,9 @@
 import React, { PropTypes } from 'react';
 import { connect } from 'react-redux';
-import { Link } from 'react-router';
-import Counter from '../components/Counter';
-import { updateCounterAndPersist } from '../redux/counter';
+import { createNewUser, logInUser, logOutUser } from '../redux/user';
+import LoginOrSignup from '../components/LoginOrSignup';
+import ProtectedContent from '../components/ProtectedContent';
+import userShape from '../shapes/user';
 
 const selector = state => ({
   count: state.counter,
@@ -10,25 +11,39 @@ const selector = state => ({
 });
 
 const dispatcher = dispatch => ({
-  updateCounter: count => dispatch(updateCounterAndPersist(count))
+  signUpNewUser: (email, password) => dispatch(createNewUser(email, password)),
+  signInUser: (email, password) => dispatch(logInUser(email, password)),
+  signOutUser: () => dispatch(logOutUser())
 });
 
 export const App = (props) => {
-  const { count, updateCounter } = props;
+  const {
+    user,
+    signUpNewUser,
+    signInUser,
+    signOutUser
+  } = props;
+
   return (
     <div>
-      <Counter
-        count={count}
-        onClick={updateCounter}
+      <LoginOrSignup
+        user={user}
+        onSignUp={signUpNewUser}
+        onSignIn={signInUser}
       />
-      <Link to="/testing">Testing out things</Link>
+      <ProtectedContent
+        user={user}
+        onSignOut={signOutUser}
+      />
     </div>
   );
 };
 
 App.propTypes = {
-  count: PropTypes.number,
-  updateCounter: PropTypes.func
+  user: PropTypes.shape(userShape),
+  signUpNewUser: PropTypes.func,
+  signInUser: PropTypes.func,
+  signOutUser: PropTypes.func
 };
 
 export default connect(selector, dispatcher)(App);
