@@ -1,5 +1,5 @@
 import { createAction } from 'redux-actions';
-import firebase from '../firebase';
+import firebase from '../firebase/';
 
 // Constants
 export const UPDATE_COUNTER = 'UPDATE_COUNTER';
@@ -15,7 +15,7 @@ export const updateCounter = createAction(UPDATE_COUNTER);
 // Reducer
 const defaultState = 0;
 export default function counterReducer(state = defaultState, action) {
-  switch(action.type) {
+  switch (action.type) {
     case UPDATE_COUNTER:
       return action.payload;
     default:

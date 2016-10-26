@@ -1,5 +1,6 @@
-import React from 'react';
+import React, { PropTypes } from 'react';
 import { connect } from 'react-redux';
+import { Link } from 'react-router';
 import Counter from '../components/Counter';
 import { updateCounterAndPersist } from '../redux/counter';
 
@@ -11,17 +12,23 @@ export const App = (props) => {
         count={count}
         onClick={updateCounter}
       />
+      <Link to="/testing">Testing out things</Link>
     </div>
   );
-}
+};
 
-const selector = (state) => ({
+App.propTypes = {
+  count: PropTypes.number,
+  updateCounter: PropTypes.func
+};
+
+const selector = state => ({
   count: state.counter,
   user: state.user
 });
 
-const dispatcher = (dispatch) => ({
-  updateCounter: (count) => dispatch(updateCounterAndPersist(count))
+const dispatcher = dispatch => ({
+  updateCounter: count => dispatch(updateCounterAndPersist(count))
 });
 
 export default connect(selector, dispatcher)(App);

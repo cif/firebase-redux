@@ -10,7 +10,7 @@ const createAppStore = (initialState = {}) =>
       applyMiddleware(
         thunkMiddleware
       ),
-      window.devToolsExtension ? window.devToolsExtension() : f => f
+      global.devToolsExtension ? global.devToolsExtension() : f => f
     )
   );
 

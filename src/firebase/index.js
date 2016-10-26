@@ -1,8 +1,8 @@
 import firebase from 'firebase';
-import { updateCounter } from './redux/counter';
+import { updateCounter } from '../redux/counter';
 
 // Replace this with your non hidden credentials or const
-import firebaseConfig from './config/firebaseConfig';
+import firebaseConfig from '../config/firebaseConfig';
 
 firebase.initializeApp(firebaseConfig);
 
@@ -13,6 +13,6 @@ export const firebaseConnector = (store) => {
   });
 
   return store;
-}
+};
 
 export default firebase;
