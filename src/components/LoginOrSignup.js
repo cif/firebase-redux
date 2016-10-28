@@ -8,6 +8,7 @@ class LoginOrSignup extends React.Component {
   }
 
   handleSignIn = () => {
+    console.log('here bro', this.props.onSignIn);
     this.props.onSignIn(this.email.value, this.pass.value);
   }
 
