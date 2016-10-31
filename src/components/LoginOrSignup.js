@@ -8,7 +8,6 @@ class LoginOrSignup extends React.Component {
   }
 
   handleSignIn = () => {
-    console.log('here bro', this.props.onSignIn);
     this.props.onSignIn(this.email.value, this.pass.value);
   }
 
@@ -23,14 +22,14 @@ class LoginOrSignup extends React.Component {
 
     return (
       <div>
-        <h1>Login or signup! hot!</h1>
+        <h1>Login or signup!</h1>
         {error && <h2>{error.message}</h2>}
         {isInFlight && <h3>Loading...</h3>}
         <input
           ref={(email) => { this.email = email; }}
           type="email"
           value={user.email}
-          onChange={(val) => { console.log('what the actual fucking shit react?', val); }}
+          onChange={val => val}
         />
         <input ref={(pass) => { this.pass = pass; }} type="password" />
         <button onClick={this.handleSignUp}>SIGN UP</button>

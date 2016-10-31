@@ -1,4 +1,5 @@
 import React, { PropTypes } from 'react';
+import { Link } from 'react-router';
 import firebase from '../firebase/';
 
 class ImageUploader extends React.Component {
@@ -11,9 +12,10 @@ class ImageUploader extends React.Component {
   }
 
   componentDidMount() {
-    firebase.storage().ref('ugc').child(`pictures/${this.props.fileName}`).getDownloadURL().then((url) => {
-      this.setState({ picture: url });
-    });
+    firebase.storage().ref('ugc').child(`pictures/${this.props.fileName}`).getDownloadURL()
+      .then((url) => {
+        this.setState({ picture: url });
+      });
   }
 
   handleOnChange = (e) => {
@@ -47,6 +49,7 @@ class ImageUploader extends React.Component {
         <input type="file" onChange={this.handleOnChange} />
         <br />
         <img width="90" src={this.state.picture} alt="TBD" />
+        <Link to="/test">testing</Link>
       </div>
     );
   }

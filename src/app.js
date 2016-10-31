@@ -1,23 +1,12 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import { Provider } from 'react-redux';
-import { Router, Route, browserHistory } from 'react-router';
-import { syncHistoryWithStore } from 'react-router-redux';
-import { firebaseConnector } from './firebase/';
-import createAppStore from './redux/store';
-import App from './containers/App';
-import Testing from './containers/Testing';
+import Routes from './containers/Routes';
 
-(() => {
-  const store = firebaseConnector(createAppStore());
-  const history = syncHistoryWithStore(browserHistory, store);
+ReactDOM.render(
+  <Routes />,
+  global.document.getElementById('app')
+);
 
-  ReactDOM.render(
-    (
-      <Provider store={store}>
-        <App />
-      </Provider>
-    ),
-    global.document.getElementById('app')
-  );
-})();
+if (module.hot) {
+  module.hot.accept();
+}
